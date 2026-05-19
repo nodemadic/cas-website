@@ -19,30 +19,48 @@ python3 -m http.server 8765
 # open http://localhost:8765
 ```
 
-## Deploy to Turbify
+## Hosting: GitHub Pages + Turbify DNS
 
-Turbify hosting offers two paths depending on the plan:
+Site is hosted free on **GitHub Pages** from this repo. Turbify keeps the domain but DNS points at GitHub.
 
-### Option A — Turbify SiteBuilder (drag-and-drop, may not accept raw HTML)
+- Repo: https://github.com/nodemadic/cas-website
+- Pages URL (fallback): https://nodemadic.github.io/cas-website/
+- Production URL (after DNS): https://www.completeaccountingsol.com
 
-SiteBuilder is template-based and typically does not allow uploading arbitrary HTML/CSS. If Mel's plan only includes SiteBuilder, the cleanest path is to recreate the layout inside SiteBuilder, copying text/colors from `index.html` / `style.css`.
+### DNS setup at Turbify
 
-### Option B — Turbify Web Hosting (File Manager / FTP)
+Log in to https://dcp.turbify.com/dcp/completeaccountingsol.com/dns and replace the existing records with these:
 
-If the plan includes Web Hosting with file upload:
+**Apex domain (`completeaccountingsol.com`) — 4 A records:**
 
-1. Log in to Turbify Hosting Control Panel.
-2. Open **File Manager** (or connect via FTP — credentials under *Manage My Services* → *Web Hosting* → *FTP*).
-3. Navigate to the `public_html/` (or `www/`) document root.
-4. Upload:
-   - `index.html`
-   - `style.css`
-5. Set `index.html` as the default document if not already.
-6. Visit `https://www.completeaccountingsol.com/` to verify.
+| Type | Host | Value           |
+|------|------|-----------------|
+| A    | @    | 185.199.108.153 |
+| A    | @    | 185.199.109.153 |
+| A    | @    | 185.199.110.153 |
+| A    | @    | 185.199.111.153 |
 
-### DNS
+**www subdomain — 1 CNAME:**
 
-DNS already points to Turbify nameservers (per [dcp.turbify.com/dcp/completeaccountingsol.com/dns](https://dcp.turbify.com/dcp/completeaccountingsol.com/dns)). No DNS change needed — just replace the "Under Construction" placeholder.
+| Type  | Host | Value                  |
+|-------|------|------------------------|
+| CNAME | www  | nodemadic.github.io.   |
+
+**Remove** any existing A/CNAME records for `@` and `www` that point to Turbify hosting (often `*.bizhost.com`, `*.turbifyhosting.com`, or similar). Leave MX (email) records untouched if Mel uses Turbify email.
+
+### After DNS propagates (5 min – 24 hr)
+
+1. Verify DNS: `dig www.completeaccountingsol.com` should resolve to `nodemadic.github.io`.
+2. Re-enable custom domain + HTTPS in GitHub:
+   ```bash
+   gh api -X PUT /repos/nodemadic/cas-website/pages \
+     -f cname=www.completeaccountingsol.com -F https_enforced=true
+   ```
+3. Visit https://www.completeaccountingsol.com — should load the site.
+
+### Editing the site
+
+Edit `index.html` / `style.css` locally, commit, push — GitHub Pages auto-deploys in ~1 min.
 
 ## Editing content
 
