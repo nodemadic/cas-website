@@ -174,21 +174,22 @@ h2::after {
 }
 .services-numbered li {
   counter-increment: svc;
-  display: grid;
-  grid-template-columns: 3rem 1fr;
-  gap: 1rem;
-  align-items: start;
+  display: flex;
+  gap: 1.25rem;
+  align-items: flex-start;
   padding: 1rem 0;
   border-bottom: 1px solid var(--rule);
 }
 .services-numbered li::before {
   content: counter(svc, decimal-leading-zero);
+  flex: 0 0 3rem;
   font-family: 'Playfair Display', Georgia, serif;
   font-size: 1.6rem;
   color: var(--accent);
   font-weight: 700;
   line-height: 1;
 }
+.services-numbered .svc-body { flex: 1; }
 .services-numbered h3 {
   font-family: 'Playfair Display', Georgia, serif;
   margin: 0 0 0.25rem;
