@@ -105,47 +105,85 @@ h2::after {
   text-align: center;
 }
 
-/* Services */
-.services-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 1.25rem;
-}
+/* Experience variants */
 
-.service {
-  background: #fff;
-  border: 1px solid var(--rule);
-  border-left: 4px solid var(--burgundy);
-  padding: 1.5rem 1.5rem 1.25rem;
-  border-radius: 4px;
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
+/* V1: Banded alternating rows */
+.exp-banded {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  border-top: 2px solid var(--burgundy);
+  border-bottom: 2px solid var(--burgundy);
 }
-.service:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(107, 26, 31, 0.08);
+.exp-banded li {
+  padding: 0.85rem 1.25rem;
+  color: var(--ink);
+  font-weight: 500;
 }
-.service h3 {
-  font-family: 'Playfair Display', Georgia, serif;
-  margin: 0 0 0.5rem;
-  color: var(--burgundy-dark);
-  font-size: 1.2rem;
-}
-.service p { margin: 0; color: var(--muted); font-size: 0.95rem; }
+.exp-banded li:nth-child(odd) { background: #fff; }
+.exp-banded li:nth-child(even) { background: rgba(31, 77, 43, 0.05); }
 
-/* Experience */
-.experience-list {
+/* V2: Two-column boxed cards */
+.exp-cards {
   list-style: none;
   padding: 0;
   margin: 0;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 0.4rem 2rem;
+  gap: 0.75rem;
 }
-.experience-list li {
-  padding: 0.6rem 0;
-  border-bottom: 1px dotted var(--rule);
+.exp-cards li {
+  background: #fff;
+  border: 1px solid var(--rule);
+  border-left: 4px solid var(--accent);
+  padding: 0.9rem 1.1rem;
+  border-radius: 4px;
+  color: var(--ink);
+  font-weight: 500;
 }
-.role { color: var(--ink); font-weight: 500; }
+
+/* V3: Gold checkmark, two columns */
+.exp-checks {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 0.5rem 2rem;
+}
+.exp-checks li {
+  padding: 0.5rem 0 0.5rem 1.75rem;
+  position: relative;
+  color: var(--ink);
+  border-bottom: 1px solid var(--rule);
+}
+.exp-checks li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  top: 0.45rem;
+  color: var(--accent);
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+/* V4: Pill tags */
+.exp-pills {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+.exp-pills li {
+  background: var(--burgundy);
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  font-size: 0.92rem;
+  font-weight: 500;
+}
 
 /* Variant labels (preview only — remove after Mel picks) */
 .variant-section { position: relative; padding-top: 2.5rem; }
@@ -189,6 +227,7 @@ h2::after {
   font-weight: 700;
   line-height: 1;
 }
+.services-numbered.no-marker li::before { content: none; display: none; }
 .services-numbered .svc-body { flex: 1; }
 .services-numbered h3 {
   font-family: 'Playfair Display', Georgia, serif;
@@ -198,48 +237,6 @@ h2::after {
 }
 .services-numbered p { margin: 0; color: var(--muted); }
 
-/* Variant C — Definition list, two columns */
-.services-deflist {
-  display: grid;
-  grid-template-columns: minmax(220px, 1fr) 2fr;
-  gap: 0.5rem 2rem;
-  margin: 0;
-}
-.services-deflist dt {
-  font-family: 'Playfair Display', Georgia, serif;
-  font-weight: 600;
-  color: var(--burgundy);
-  padding: 0.75rem 0;
-  border-top: 1px solid var(--rule);
-}
-.services-deflist dd {
-  margin: 0;
-  padding: 0.75rem 0;
-  color: var(--muted);
-  border-top: 1px solid var(--rule);
-}
-
-/* Variant D — Banded rows */
-.services-banded {
-  border-top: 2px solid var(--burgundy);
-  border-bottom: 2px solid var(--burgundy);
-}
-.band-row {
-  display: grid;
-  grid-template-columns: 1fr 2fr;
-  gap: 2rem;
-  padding: 1.5rem 1.25rem;
-  align-items: start;
-}
-.band-row:nth-child(odd) { background: #fff; }
-.band-row:nth-child(even) { background: rgba(31, 77, 43, 0.04); }
-.band-title h3 {
-  font-family: 'Playfair Display', Georgia, serif;
-  margin: 0;
-  color: var(--burgundy-dark);
-  font-size: 1.15rem;
-}
-.band-body p { margin: 0; color: var(--muted); }
 
 /* Contact */
 .contact-card {
@@ -276,8 +273,5 @@ footer {
   .hero-inner { flex-direction: column; align-items: flex-start; }
   .hero-contact { text-align: left; }
   h2 { font-size: 1.6rem; }
-  .experience-list li { padding: 0.5rem 0; }
-  .services-deflist { grid-template-columns: 1fr; gap: 0; }
-  .services-deflist dd { padding-top: 0; padding-bottom: 1rem; border-top: none; }
-  .band-row { grid-template-columns: 1fr; gap: 0.5rem; padding: 1.25rem 1rem; }
+  .exp-banded li { padding: 0.7rem 1rem; }
 }
