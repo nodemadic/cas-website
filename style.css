@@ -1,10 +1,10 @@
 :root {
-  --burgundy: #6b1a1f;
-  --burgundy-dark: #4a1015;
-  --cream: #faf7f2;
+  --burgundy: #1f4d2b;
+  --burgundy-dark: #143620;
+  --cream: #f7f5ef;
   --ink: #1f1f1f;
   --muted: #5b5b5b;
-  --rule: #e3dccf;
+  --rule: #e0ddd0;
   --accent: #b08a3e;
 }
 
@@ -64,7 +64,7 @@ a:hover { text-decoration: underline; }
 }
 
 .hero-contact {
-  text-align: right;
+  text-align: left;
   font-size: 0.95rem;
 }
 .hero-contact p { margin: 0.15rem 0; }
@@ -138,26 +138,107 @@ h2::after {
   padding: 0;
   margin: 0;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 0.4rem 2rem;
 }
 .experience-list li {
-  display: flex;
-  justify-content: space-between;
-  gap: 1rem;
   padding: 0.6rem 0;
   border-bottom: 1px dotted var(--rule);
 }
 .role { color: var(--ink); font-weight: 500; }
-.years { color: var(--muted); font-variant-numeric: tabular-nums; white-space: nowrap; }
 
-.prior-heading {
-  font-family: 'Playfair Display', Georgia, serif;
-  color: var(--burgundy);
-  margin-top: 2rem;
-  font-size: 1.3rem;
+/* Variant labels (preview only — remove after Mel picks) */
+.variant-section { position: relative; padding-top: 2.5rem; }
+.variant-label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: var(--accent);
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.3rem 0.7rem;
+  border-radius: 3px;
 }
-.prior { color: var(--muted); margin: 0; }
+
+/* Variant B — Numbered list */
+.services-numbered {
+  list-style: none;
+  counter-reset: svc;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 1rem;
+}
+.services-numbered li {
+  counter-increment: svc;
+  display: grid;
+  grid-template-columns: 3rem 1fr;
+  gap: 1rem;
+  align-items: start;
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--rule);
+}
+.services-numbered li::before {
+  content: counter(svc, decimal-leading-zero);
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1.6rem;
+  color: var(--accent);
+  font-weight: 700;
+  line-height: 1;
+}
+.services-numbered h3 {
+  font-family: 'Playfair Display', Georgia, serif;
+  margin: 0 0 0.25rem;
+  color: var(--burgundy-dark);
+  font-size: 1.15rem;
+}
+.services-numbered p { margin: 0; color: var(--muted); }
+
+/* Variant C — Definition list, two columns */
+.services-deflist {
+  display: grid;
+  grid-template-columns: minmax(220px, 1fr) 2fr;
+  gap: 0.5rem 2rem;
+  margin: 0;
+}
+.services-deflist dt {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-weight: 600;
+  color: var(--burgundy);
+  padding: 0.75rem 0;
+  border-top: 1px solid var(--rule);
+}
+.services-deflist dd {
+  margin: 0;
+  padding: 0.75rem 0;
+  color: var(--muted);
+  border-top: 1px solid var(--rule);
+}
+
+/* Variant D — Banded rows */
+.services-banded {
+  border-top: 2px solid var(--burgundy);
+  border-bottom: 2px solid var(--burgundy);
+}
+.band-row {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 2rem;
+  padding: 1.5rem 1.25rem;
+  align-items: start;
+}
+.band-row:nth-child(odd) { background: #fff; }
+.band-row:nth-child(even) { background: rgba(31, 77, 43, 0.04); }
+.band-title h3 {
+  font-family: 'Playfair Display', Georgia, serif;
+  margin: 0;
+  color: var(--burgundy-dark);
+  font-size: 1.15rem;
+}
+.band-body p { margin: 0; color: var(--muted); }
 
 /* Contact */
 .contact-card {
@@ -194,6 +275,8 @@ footer {
   .hero-inner { flex-direction: column; align-items: flex-start; }
   .hero-contact { text-align: left; }
   h2 { font-size: 1.6rem; }
-  .experience-list li { flex-direction: column; gap: 0.1rem; padding: 0.5rem 0; }
-  .years { font-size: 0.9rem; }
+  .experience-list li { padding: 0.5rem 0; }
+  .services-deflist { grid-template-columns: 1fr; gap: 0; }
+  .services-deflist dd { padding-top: 0; padding-bottom: 1rem; border-top: none; }
+  .band-row { grid-template-columns: 1fr; gap: 0.5rem; padding: 1.25rem 1rem; }
 }
