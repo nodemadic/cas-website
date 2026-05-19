@@ -105,44 +105,7 @@ h2::after {
   text-align: center;
 }
 
-/* Experience variants */
-
-/* V1: Banded alternating rows */
-.exp-banded {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  border-top: 2px solid var(--burgundy);
-  border-bottom: 2px solid var(--burgundy);
-}
-.exp-banded li {
-  padding: 0.85rem 1.25rem;
-  color: var(--ink);
-  font-weight: 500;
-}
-.exp-banded li:nth-child(odd) { background: #fff; }
-.exp-banded li:nth-child(even) { background: rgba(31, 77, 43, 0.05); }
-
-/* V2: Two-column boxed cards */
-.exp-cards {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 0.75rem;
-}
-.exp-cards li {
-  background: #fff;
-  border: 1px solid var(--rule);
-  border-left: 4px solid var(--accent);
-  padding: 0.9rem 1.1rem;
-  border-radius: 4px;
-  color: var(--ink);
-  font-weight: 500;
-}
-
-/* V3: Gold checkmark, two columns */
+/* Client Experience — bullet list, two columns */
 .exp-checks {
   list-style: none;
   padding: 0;
@@ -152,56 +115,23 @@ h2::after {
   gap: 0.5rem 2rem;
 }
 .exp-checks li {
-  padding: 0.5rem 0 0.5rem 1.75rem;
+  padding: 0.5rem 0 0.5rem 1.5rem;
   position: relative;
   color: var(--ink);
   border-bottom: 1px solid var(--rule);
 }
 .exp-checks li::before {
-  content: "✓";
+  content: "•";
   position: absolute;
-  left: 0;
-  top: 0.45rem;
+  left: 0.25rem;
+  top: 0.35rem;
   color: var(--accent);
   font-weight: 700;
-  font-size: 1.1rem;
+  font-size: 1.4rem;
+  line-height: 1;
 }
 
-/* V4: Pill tags */
-.exp-pills {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.6rem;
-}
-.exp-pills li {
-  background: var(--burgundy);
-  color: #fff;
-  padding: 0.5rem 1rem;
-  border-radius: 999px;
-  font-size: 0.92rem;
-  font-weight: 500;
-}
-
-/* Variant labels (preview only — remove after Mel picks) */
-.variant-section { position: relative; padding-top: 2.5rem; }
-.variant-label {
-  position: absolute;
-  top: 0;
-  left: 0;
-  background: var(--accent);
-  color: #fff;
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  padding: 0.3rem 0.7rem;
-  border-radius: 3px;
-}
-
-/* Variant B — Numbered list */
+/* Services — minimal list */
 .services-numbered {
   list-style: none;
   counter-reset: svc;
